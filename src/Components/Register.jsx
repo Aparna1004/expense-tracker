@@ -4,7 +4,10 @@ import React ,{useState} from 'react';
 
 const Register = () => {
 
-    
+    const [Username,setUsername] = useState("");
+    const [Number,setNumber] = useState("");
+    const [Email,setEmail] = useState("");
+    const [Password,setPassword] = useState("");
 
     const  handlesubmit= async(e)=>{
         e.preventDefault();
@@ -19,10 +22,10 @@ const Register = () => {
     <div className='h-screen flex justify-center items-center bg-gray-400'>
       <form onSubmit={handlesubmit} className='flex flex-col gap-10 p-4 px-12 rounded-lg '>
         <div className='flex flex-col gap-6'>
-        <input type='text' placeholder='Username' onChange={(i)=>setUsername(i.target.value)} required />
-        <input type='phone' placeholder='phone number' onChange={(f)=>setNumber(f.target.value)} required/>
-        <input type="email" placeholder='email' onChange={(g)=>setEmail(g.target.value)} required/>
-        <input type='password' placeholder='Password' onChange={(h)=>setPassword(h.target.value)} required/>
+        <input type='text' placeholder='Username' onChange={(e)=>setUsername(e.target.value)} required />
+        <input type='phone' placeholder='phone number' onChange={(e)=>setNumber(e.target.value)} required/>
+        <input type="email" placeholder='email' onChange={(e)=>setEmail(e.target.value)} required/>
+        <input type='password' placeholder='Password' onChange={(e)=>setPassword(e.target.value)} required/>
         <input type='submit'/>
     </div>
     <div>

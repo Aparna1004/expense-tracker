@@ -35,12 +35,15 @@ function SideNav() {
 // },[])
 
   return (
-    <div className='h-screen p-5 border-shadow-sm'>
-      <Image src={logo}
+    <div className='h-screen p-5 border-shadow-sm w-1/5'>
+      <div className='flex items-center gap-4'><Image src={logo}
       alt='logo' 
       width={60}
       height={50}
-      />
+      /><h2 className=''>
+        aparna
+      </h2>
+      </div>
       <div className='mt-5'>
             {menuList.map((menu,index)=>(
               <Link href={menu.path}>
