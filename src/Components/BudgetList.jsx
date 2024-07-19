@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateBudget from './CreateBudget'
+import CreateBudget from '@/Components/CreateBudget';
 import { ButtonDemo } from '@/Components/ButtonDemo'
 
 function budgetlist() {
