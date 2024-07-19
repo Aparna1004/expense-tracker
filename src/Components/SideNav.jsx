@@ -35,7 +35,7 @@ function SideNav() {
 // },[])
 
   return (
-    <div className='h-screen p-5 border-shadow-sm w-1/5'>
+    <div className='h-screen p-5 border-shadow-sm w-1/5 border-r-2'>
       <div className='flex items-center gap-4'><Image src={logo}
       alt='logo' 
       width={60}

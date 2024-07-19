@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Login_form = () => {
+
+  console.log(auth);
+
   const[email,setEmail]=useState("");
   const[password,setPassword]=useState("");
   const[error,setError]=useState("");
@@ -16,7 +19,7 @@ const Login_form = () => {
       try{
         await signInWithEmailAndPassword(auth,email,password);
         console.log("user logged in successfully");
-        router.push('/dashboard');
+        // router.push('/dashboard');
       }
       catch(err){
         console.error(err);

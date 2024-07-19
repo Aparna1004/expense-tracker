@@ -17,6 +17,13 @@ const CreateBudget = () => {
   const [emojiIcon,setEmojiIcon]=useState("😁");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  const [name,setName]=useState();
+  const [amount,setAmount]=useState();
+
+  const onCreateBudget=async()=>{
+    // const result=await 
+
+  }
   return (
     <div>
       <Dialog>
@@ -43,14 +50,14 @@ const CreateBudget = () => {
                 </div>
                 <div className='mt-2'> 
                   <h2 className='text-black font-medium my-1'>Budget Name</h2>
-                  <Input placeholder="e.g Home Decor"></Input>
+                  <Input type="text" placeholder="e.g Home Decor" onChange={(e)=>setName(e.target.value)}/>
                 </div>
                 <div className='mt-2'> 
                   <h2 className='text-black font-medium my-1'>Budget Amount</h2>
-                  <Input placeholder="e.g 5000"></Input>
+                  <Input type="number" placeholder="e.g 5000 " onChange={(e)=>setAmount(e.target.value)} />
                 </div>
-                <Button className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">Create Budget</Button>
-              </div>
+                <Button disabled={!(name&&amount)} onClick={()=>onCreateBudget()} className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">Create Budget</Button>
+              </div> 
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
