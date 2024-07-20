@@ -1,18 +1,24 @@
 "use client";
-import DashboardHeader from '@/Components/DashboardHeader'
-import SideNav from '@/Components/SideNav'
+import DashboardHeader from '@/Components/DashboardHeader';
+import SideNav from '@/Components/SideNav';
 import { db } from '@/utils/dbConfig';
 import { Budgets } from '@/utils/schema';
+import { auth } from '@/firebase';
+// import {eq} from ""
+import React, { useEffect } from 'react';
 import { eq } from 'drizzle-orm';
-import React, { useEffect } from 'react'
 
 export default async function layout({children}) {
 
+
+
   useEffect(()=>{
-    checkUserBudgets();
-  },[]);
+    auth&&checkUserBudgets();
+  },[auth]);
   const checkUserBudgets= async() => {
-    const result=await db.select().from(Budgets).where(eq(Budgets.createdBy,))
+    const result=await db.select().from(Budgets).where(eq(Budgets.createdBy,auth?.currentUser?.email))
+
+    console.log(result);
   }
 
   return (
