@@ -1,34 +1,44 @@
 "use client";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import CreateBudget from '@/Components/CreateBudget';
 import { db } from '@/utils/dbConfig';
-import { getTableColumns,eq,sql } from 'drizzle-orm';
+import { getTableColumns, eq, sql } from 'drizzle-orm';
 import { auth } from '@/firebase';
 import { Budgets, Expense } from '@/utils/schema';
+import BudgetItem from './BudgetItem';
 
 function BudgetList() {
+  const [budgetList, setBudgetList] = useState([]);
 
-  useEffect(()=>{
-    auth && getBudgetList();
-  },[auth]);
+  useEffect(() => {
+    if (auth && auth.currentUser) {
+      getBudgetList();
+    }
+  }, [auth]);
 
-  const  getBudgetList = async () =>{
+  const getBudgetList = async () => {
     const result = await db.select({
       ...getTableColumns(Budgets),
-      totalSpend:sql `sum(${Expense.amount})`.mapWith(Number),
-      totalItem:sql `count(${Expense.id})`.mapWith(Number),
-    }).from(Budgets).leftJoin(Expense,eq(Budgets.id,Expense.budgetId)).where(eq(Budgets.createdBy,auth?.currentUser?.email)).groupBy(Budgets.id);
+      totalSpend: sql`sum(${Expense.amount})`.mapWith(Number),
+      totalItem: sql`count(${Expense.id})`.mapWith(Number),
+    }).from(Budgets)
+      .leftJoin(Expense, eq(Budgets.id, Expense.budgetId))
+      .where(eq(Budgets.createdBy, auth?.currentUser?.email))
+      .groupBy(Budgets.id);
 
-    console.log(result);
-  }
+    setBudgetList(result);
+  };
 
   return (
     <div className='mt-7'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-     <CreateBudget/>
-     </div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
+        <CreateBudget />
+        {budgetList.map((budget) => (
+          <BudgetItem budget={budget} />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default BudgetList
+export default BudgetList;

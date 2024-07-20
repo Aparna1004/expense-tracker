@@ -17,7 +17,7 @@ const Login_form = () => {
       try{
         await signInWithEmailAndPassword(auth,email,password);
         console.log("user logged in successfully");
-        // router.push('/dashboard');
+        router.push('/dashboard');
         console.log(auth.currentUser.email);
       }
       catch(err){
