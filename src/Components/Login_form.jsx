@@ -7,8 +7,6 @@ import { useState } from 'react';
 
 const Login_form = () => {
 
-  console.log(auth);
-
   const[email,setEmail]=useState("");
   const[password,setPassword]=useState("");
   const[error,setError]=useState("");
@@ -20,6 +18,7 @@ const Login_form = () => {
         await signInWithEmailAndPassword(auth,email,password);
         console.log("user logged in successfully");
         // router.push('/dashboard');
+        console.log(auth.currentUser.email);
       }
       catch(err){
         console.error(err);

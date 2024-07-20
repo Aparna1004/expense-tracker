@@ -9,7 +9,6 @@ console.log(process.env.DATABASE_URL);
     <div>
       <Header/>
       <Landing/>
-
     </div>
   );
 }

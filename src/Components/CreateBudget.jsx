@@ -11,6 +11,10 @@ import {
 import EmojiPicker from 'emoji-picker-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import { db } from '@/utils/dbConfig';
+import { auth } from '@/firebase';
+import { Budgets } from '@/utils/schema';
+import { toast } from 'sonner';
 
 const CreateBudget = () => {
 
@@ -21,8 +25,19 @@ const CreateBudget = () => {
   const [amount,setAmount]=useState();
 
   const onCreateBudget=async()=>{
-    // const result=await 
+    const result = await db.insert(Budgets).values(
+      {
+        name:name,
+        amount:amount,
+        emojiIcon:emojiIcon,
+        createdBy:auth?.currentUser?.email,
+        icon:emojiIcon
+      }
+    ).returning({insertedId:Budgets.id});
 
+    if(result){
+      toast("Budgets created successfully")
+    }
   }
   return (
     <div>
