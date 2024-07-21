@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import CreateBudget from '@/Components/CreateBudget';
 import { db } from '@/utils/dbConfig';
-import { getTableColumns, eq, sql } from 'drizzle-orm';
+import { getTableColumns, eq, sql, desc } from 'drizzle-orm';
 import { auth } from '@/firebase';
 import { Budgets, Expense } from '@/utils/schema';
 import BudgetItem from './BudgetItem';
@@ -24,7 +24,7 @@ function BudgetList() {
     }).from(Budgets)
       .leftJoin(Expense, eq(Budgets.id, Expense.budgetId))
       .where(eq(Budgets.createdBy, auth?.currentUser?.email))
-      .groupBy(Budgets.id);
+      .groupBy(Budgets.id).orderBy(desc(Budgets.id));
 
     setBudgetList(result);
   };

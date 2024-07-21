@@ -1,10 +1,9 @@
-import Expenses from '@/Components/Expenses'
 import React from 'react'
 
-const page = () => {
+const page = ({params}) => {
   return (
     <div>
-      <Expenses/>
+      demo
     </div>
   )
 }

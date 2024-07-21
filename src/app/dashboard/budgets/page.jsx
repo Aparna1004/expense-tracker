@@ -1,5 +1,5 @@
+import BudgetList from '@/Components/BudgetList'
 import React from 'react'
-import BudgetList from '../../../Components/BudgetList'
 function Budget() {
   return (
     <div className='p-10'>
