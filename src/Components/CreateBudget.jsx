@@ -53,7 +53,7 @@ const CreateBudget = ({ refreshData }) => {
                 </Button>
                 {showEmojiPicker && (
                   <div className='absolute'>
-                    <EmojiPicker
+                    <EmojiPicker className='z-10'
                       onEmojiClick={(e) => {
                         setEmojiIcon(e.emoji);
                         setShowEmojiPicker(false);

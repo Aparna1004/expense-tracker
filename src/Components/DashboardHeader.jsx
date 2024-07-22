@@ -1,4 +1,5 @@
 import React from 'react'
+import { auth } from '@/firebase'
 
 function DashboardHeader() {
   return (
@@ -9,7 +10,7 @@ function DashboardHeader() {
         </div>
 
         <div>
-
+            {auth?.currentUser?.email}
         </div>
       
     </div>
