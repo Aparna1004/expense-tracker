@@ -8,7 +8,7 @@ import BudgetItem from '@/Components/BudgetItem';
 import AddExpense from '@/Components/AddExpense';
 import ExpenseList from '@/Components/ExpenseList';
 import { Button } from '@/Components/ui/button';
-import { GoTrash } from "react-icons/go";
+import { GoTrash, GoArrowLeft } from "react-icons/go";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,11 +19,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
+import { useRouter } from 'next/navigation';
+import { EditBudget } from '@/Components/EditBudget';
 
 
 
 const Page = ({ params }) => {
+  const router=useRouter();
   const [budgetInfo, setBudgetInfo] = useState(null);
   const [expensesList,setExpensesList] = useState([]);
 
@@ -66,13 +69,25 @@ const Page = ({ params }) => {
   }
 
   const deleteBudget=async()=>{
-    const result = await db.delete(Budgets).where(eq(Budgets.id,params.id)).returning();
-    console.log(result);
+    const deleteExpenseResult = await db.delete(Expense).where(eq(Expense.budgetId,params.id)).returning();
+
+    if(deleteExpenseResult){
+      const result = await db.delete(Budgets).where(eq(Budgets.id,params.id)).returning();
+    }
+    router.push("/dashboard/budgets");
   }
 
   return (
     <div className='p-10'>
-      <h2 className='text-2xl font-bold flex justify-between items-center'>My Expenses
+      <div className='text-2xl font-bold flex justify-between items-center'>
+        <div className='flex gap-2 items-center cursor-pointer '>
+            <GoArrowLeft className='text-3xl' onClick={()=>router.back()}/>
+            <h2>My Expenses</h2>
+          </div>
+          <div className='flex gap-4'>
+        <div className='flex gap-2 items-center justify-end'>
+          <EditBudget budgetInfo={budgetInfo} refreshData={()=>getBudgetInfo()}/>
+        </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button className="fle0x gap-2 bg-red-500 text-white rounded-md hover:bg-red-400">
@@ -89,12 +104,12 @@ const Page = ({ params }) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction className=" bg-red-500 text-white" onClick={()=>deleteBudget()}>Continue</AlertDialogAction>
+              <AlertDialogAction className=" bg-red-500 text-white hover:bg-red-400" onClick={()=>deleteBudget()}>Continue</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-
-      </h2>
+        </div>
+      </div>
       <div className='grid grid-cols-1 md:grid-cols-2 mt-6 gap-5'>
         {(budgetInfo) ? <BudgetItem budget={budgetInfo} />:
         <div className=" h-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div>}

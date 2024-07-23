@@ -8,7 +8,7 @@ import { Budgets, Expense } from '@/utils/schema';
 import BudgetItem from './BudgetItem';
 
 function BudgetList() {
-  const [budgetList, setBudgetList] = useState([]);
+  const [budgetList, setBudgetList] = useState(null);
 
   useEffect(() => {
     if (auth && auth.currentUser) {

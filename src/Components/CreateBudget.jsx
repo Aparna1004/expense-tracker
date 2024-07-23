@@ -37,7 +37,7 @@ const CreateBudget = ({ refreshData }) => {
   return (
     <div>
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogTrigger className='w-full'>
+        <DialogTrigger asChild className='w-full'>
           <div className='bg-slate-100 py-12 px-20 rounded-md flex items-center flex-col border-2 border-dashed cursor-pointer hover:shadow-md'>
             <h2 className='text-3xl'>+</h2>
             <h2>Create New Budget</h2>
@@ -74,7 +74,7 @@ const CreateBudget = ({ refreshData }) => {
           </DialogHeader>
           <DialogFooter>
             <DialogClose className='w-full'>
-              <Button disabled={!(name && amount)} onClick={onCreateBudget} className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">
+              <Button disabled={!(name && amount)} onClick={()=>onCreateBudget()} className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">
                 Create Budget
               </Button>
             </DialogClose>
