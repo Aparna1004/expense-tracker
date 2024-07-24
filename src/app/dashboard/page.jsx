@@ -5,42 +5,67 @@ import { CardInfo } from '@/Components/CardInfo';
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expense } from '@/utils/schema';
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
+import BarChartDashboard from '@/Components/BarChartDashboard';
+import BudgetItem from '@/Components/BudgetItem';
+import ExpenseList from '@/Components/ExpenseList';
 
 const Page = () => {
   const [budgetList, setBudgetList] = useState([]);
+  const [expensesList, setExpensesList] = useState([]); // Initialize state for expenses
 
   useEffect(() => {
-    if (auth && auth.currentUser) {
-      getBudgetList();
-    }
+    auth && getBudgetList();
   }, [auth]);
 
   const getBudgetList = async () => {
-    const result = await db.select({
-      ...getTableColumns(Budgets),
-      totalSpend: sql`sum(${Expense.amount})`.mapWith(Number),
-      totalItem: sql`count(${Expense.id})`.mapWith(Number),
-    }).from(Budgets)
-      .leftJoin(Expense, eq(Budgets.id, Expense.budgetId))
-      .where(eq(Budgets.createdBy, auth?.currentUser?.email))
-      .groupBy(Budgets.id)
-      .orderBy(desc(Budgets.id));
+    if (auth?.currentUser?.email) {
+      const result = await db.select({
+        ...getTableColumns(Budgets),
+        totalSpend: sql`sum(${Expense.amount})`.mapWith(Number),
+        totalItem: sql`count(${Expense.id})`.mapWith(Number),
+      }).from(Budgets)
+        .leftJoin(Expense, eq(Budgets.id, Expense.budgetId))
+        .where(eq(Budgets.createdBy, auth.currentUser.email))
+        .groupBy(Budgets.id)
+        .orderBy(desc(Budgets.id));
 
-    setBudgetList(result);
+      setBudgetList(result);
+      console.log("here");
+      getAllExpenses();
+    }
+  };
+
+  const getAllExpenses = async () => {
+      const result = await db.select({
+        id: Expense.id,
+        name: Expense.name,
+        amount: Expense.amount,
+        createdBy: Expense.createdAt
+      }).from(Budgets)
+        .rightJoin(Expense, eq(Budgets.id, Expense.budgetId))
+        .where(eq(Budgets.createdBy, auth?.currentUser?.email))
+        .orderBy(desc(Expense.id));
+      setExpensesList(result);
+      console.log("----expensem",result);
   };
 
   return (
     <div className='p-8'>
       <h2 className='font-bold text-3xl'>Hi, {auth?.currentUser?.email ? auth?.currentUser?.email : "name"} ✌️</h2>
       <p className='text-gray-500'>Here's what's happening with your money, Let's manage your expense</p>
-      {console.log("inside--PAGE",budgetList)}
+      {console.log("inside--PAGE", budgetList)}
       <CardInfo budgetList={budgetList} />
-      <div className='grid grid-cols-1 md:grid-cols-3 mt-6'>
+      <div className='grid grid-cols-1 md:grid-cols-3 mt-6 gap-5'>
         <div className='md:col-span-2'>
-            Chart
+          <BarChartDashboard
+            budgetList={budgetList} />
+          <ExpenseList expensesList={expensesList}/>
         </div>
-        <div>
-          Other Content 
+        <div className='grid gap-3'>
+          <h2 className='font-bold text-lg'>Latest Budgets</h2>
+          {budgetList.map((budget, index) => (
+            <BudgetItem budget={budget} key={index} />
+          ))}
         </div>
       </div>
     </div>

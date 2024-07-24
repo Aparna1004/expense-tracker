@@ -8,7 +8,8 @@ const BudgetItem = ({budget}) => {
   }
 
   return (
-    <Link href={"expenses/"+budget.id} className='p-5 border rounded-lg hover:shadow-md cursor-pointer h-[170px]'>
+    <Link href={"/dashboard/expenses/"+budget.id} >
+      <div className='p-5 border rounded-lg hover:shadow-md cursor-pointer h-[170px]'>
         <div className='flex gap-2 items-center justify-between'>
         <div className='flex gap-2 items-center'>
             <h2 className='p-3 px-4 bg-slate-100 rounded-full text-2xl'>
@@ -33,6 +34,7 @@ const BudgetItem = ({budget}) => {
               }}
               ></div>
             </div>
+        </div>
         </div>
     </Link>
   )

@@ -25,9 +25,11 @@ export default async function layout({children}) {
   }
 
   return (
-    <div className='flex'>
+    <div>
+      <div className='fixed md:w-64 hidden md:block'>
       <SideNav/>
-      <div className='flex flex-col grow'>
+      </div>
+      <div className='md:ml-64 '>
       <div><DashboardHeader/></div>  
         {children}
       </div>

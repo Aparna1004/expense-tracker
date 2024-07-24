@@ -19,7 +19,8 @@ const ExpenseList = ({ expensesList, refreshData }) => {
 
   return (
     <div className='mt-3'>
-      <div className='grid grid-cols-4 bg-slate-200 p-2'>
+      <h2 className='text-2xl font-bold'>Latest Expenses List</h2>
+      <div className='grid grid-cols-4 bg-slate-200 p-2 mt-3'>
         <h2 className='font-bold'>Name</h2>
         <h2 className='font-bold'>Amount</h2>
         <h2 className='font-bold'>Date</h2>
@@ -30,7 +31,7 @@ const ExpenseList = ({ expensesList, refreshData }) => {
           <h2>{expense.name}</h2>
           <h2>{expense.amount}</h2>
           <h2>{new Date(expense.createdBy).toLocaleDateString()}</h2>
-          <h2><GoTrash className='text-red-600 cursor-pointer text-lg' onClick={() => deleteExpense(expense)} /></h2>
+          <h2 className='flex items-center justify-center'><GoTrash className='text-red-600 cursor-pointer text-lg' onClick={() => deleteExpense(expense)} /></h2>
         </div>
       ))}
     </div>
