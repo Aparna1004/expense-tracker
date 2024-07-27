@@ -1,12 +1,19 @@
-import Login_form from '@/Components/Login_form'
-import React from 'react'
+import LoginForm from '@/Components/LoginForm';
+const Login = () => {
+  // const router = useRouter();
+  // const user = useUser();
 
-const page = () => {
+  // useEffect(() => {
+  //   if (user) {
+  //     router.replace('/dashboard');
+  //   }
+  // }, [user, router]);
+
   return (
     <div>
-      <Login_form/>
+      <LoginForm />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Login;

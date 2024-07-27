@@ -8,31 +8,34 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import BarChartDashboard from '@/Components/BarChartDashboard';
 import BudgetItem from '@/Components/BudgetItem';
 import ExpenseList from '@/Components/ExpenseList';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Page = () => {
+  
+  const [user] = useAuthState(auth);
   const [budgetList, setBudgetList] = useState([]);
-  const [expensesList, setExpensesList] = useState([]); // Initialize state for expenses
+  const [expensesList, setExpensesList] = useState([]);
+  console.log(user);
 
   useEffect(() => {
-    auth && getBudgetList();
-  }, [auth]);
+    user && getBudgetList();
+  }, [user]);
 
   const getBudgetList = async () => {
-    if (auth?.currentUser?.email) {
+
       const result = await db.select({
         ...getTableColumns(Budgets),
         totalSpend: sql`sum(${Expense.amount})`.mapWith(Number),
         totalItem: sql`count(${Expense.id})`.mapWith(Number),
       }).from(Budgets)
         .leftJoin(Expense, eq(Budgets.id, Expense.budgetId))
-        .where(eq(Budgets.createdBy, auth.currentUser.email))
+        .where(eq(Budgets.createdBy, user?.email))
         .groupBy(Budgets.id)
         .orderBy(desc(Budgets.id));
 
       setBudgetList(result);
       console.log("here");
       getAllExpenses();
-    }
   };
 
   const getAllExpenses = async () => {
@@ -43,7 +46,7 @@ const Page = () => {
         createdBy: Expense.createdAt
       }).from(Budgets)
         .rightJoin(Expense, eq(Budgets.id, Expense.budgetId))
-        .where(eq(Budgets.createdBy, auth?.currentUser?.email))
+        .where(eq(Budgets.createdBy, user?.email))
         .orderBy(desc(Expense.id));
       setExpensesList(result);
       console.log("----expensem",result);
@@ -51,7 +54,7 @@ const Page = () => {
 
   return (
     <div className='p-8'>
-      <h2 className='font-bold text-3xl'>Hi, {auth?.currentUser?.email ? auth?.currentUser?.email : "name"} ✌️</h2>
+      <h2 className='font-bold text-3xl'>Hi, {user?.email ? user?.email : "name"} ✌️</h2>
       <p className='text-gray-500'>Here's what's happening with your money, Let's manage your expense</p>
       {console.log("inside--PAGE", budgetList)}
       <CardInfo budgetList={budgetList} />
@@ -59,7 +62,7 @@ const Page = () => {
         <div className='md:col-span-2'>
           <BarChartDashboard
             budgetList={budgetList} />
-          <ExpenseList expensesList={expensesList}/>
+          <ExpenseList expensesList={expensesList} refreshData={()=>getBudgetList()}/>
         </div>
         <div className='grid gap-3'>
           <h2 className='font-bold text-lg'>Latest Budgets</h2>

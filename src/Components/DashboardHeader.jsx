@@ -10,7 +10,6 @@ function DashboardHeader() {
         </div>
 
         <div>
-            {auth?.currentUser?.email}
         </div>
       
     </div>

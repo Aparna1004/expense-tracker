@@ -7,13 +7,14 @@ import { Budgets, Expense } from '@/utils/schema';
 import moment from 'moment';
 import { Loader } from 'lucide-react';
 
-function AddExpense({budgetId,user,refreshData}) {
+function AddExpense({budgetId,refreshData}) {
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
 
   const AddNewExpense= async()=>{
+    setLoading(true);
    const result = await db.insert(Expense).values({
       name: name,
       amount: amount,
@@ -23,8 +24,11 @@ function AddExpense({budgetId,user,refreshData}) {
    setName('');
    setAmount('');
    console.log(result);
+
+
+
    if (result){
-    setLoading(true);
+    setLoading(false);
       refreshData();
    }
    setLoading(false);

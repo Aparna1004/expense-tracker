@@ -1,19 +1,28 @@
 "use client";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import { auth, db } from '@/firebase';
 import { setDoc, doc } from "firebase/firestore";
 import { useRouter } from 'next/navigation'; // Correct import from next/navigation
 import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Register = () => {
+
+    const router = useRouter();
+    const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      router.push("/dashboard");
+    }
+  }, [user]);
+
     const [username, setUsername] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
-    const router = useRouter(); // Initialize useRouter
 
     const handleSubmit = async (e) => {
         e.preventDefault();

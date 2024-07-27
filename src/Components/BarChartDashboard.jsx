@@ -6,8 +6,10 @@ function BarChartDashboard({budgetList}) {
   return (
     <div className='border rounded-lg p-5'>
         <h2 className='font-bold text-lg'>Activity</h2>
-        <ResponsiveContainer width={"80%"} height={300}>
+        <ResponsiveContainer width={"80%"} height={300}
+        className="p-3">
       <BarChart
+       className='p-2'
       width={500}
       height={300}
       data={budgetList}

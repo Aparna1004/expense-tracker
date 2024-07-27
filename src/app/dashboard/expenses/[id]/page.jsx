@@ -22,11 +22,16 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useRouter } from 'next/navigation';
 import { EditBudget } from '@/Components/EditBudget';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 
 const Page = ({ params }) => {
   const router=useRouter();
+  const [user] = useAuthState(auth);
+  if(!user) router.replace('/login');
+
+
   const [budgetInfo, setBudgetInfo] = useState(null);
   const [expensesList,setExpensesList] = useState([]);
 

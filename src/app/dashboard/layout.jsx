@@ -1,38 +1,41 @@
 "use client";
+
 import DashboardHeader from '@/Components/DashboardHeader';
 import SideNav from '@/Components/SideNav';
-import { db } from '@/utils/dbConfig';
-import { Budgets } from '@/utils/schema';
-import { auth } from '@/firebase';
-import React, { useEffect } from 'react';
-import { eq } from 'drizzle-orm';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from '@/firebase'; // Adjust the import path as necessary
 
-export default async function layout({children}) {
+export default function Layout({ children }) {
+  const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+  const [isClient, setIsClient] = useState(false);
 
-  const router=useRouter();
+  useEffect(() => {
+    // This ensures the component only renders on the client side
+    setIsClient(true);
+  }, []);
 
-  useEffect(()=>{
-    auth && checkUserBudgets();
-  },[auth]);
-  const checkUserBudgets= async() => {
-    const result=await db.select().from(Budgets).where(eq(Budgets.createdBy,auth?.currentUser?.email))
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
 
-    // console.log(result);
-    // if(result?.length==0){
-    //   router.replace("/dashboard/budgets")
-    // } 
+  if (!isClient) {
+    return null; // Or a loading spinner, placeholder, etc.
   }
 
   return (
     <div>
       <div className='fixed md:w-64 hidden md:block'>
-      <SideNav/>
+        <SideNav />
       </div>
-      <div className='md:ml-64 '>
-      <div><DashboardHeader/></div>  
+      <div className='md:ml-64'>
+        <div><DashboardHeader /></div>
         {children}
       </div>
     </div>
-  )
+  );
 }

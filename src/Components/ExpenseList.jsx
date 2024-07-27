@@ -18,13 +18,13 @@ const ExpenseList = ({ expensesList, refreshData }) => {
   }
 
   return (
-    <div className='mt-3'>
-      <h2 className='text-2xl font-bold'>Latest Expenses List</h2>
+    <div className='mt-5'>
+      <h2 className='font-bold text-lg mt-2'>Latest Expenses</h2>
       <div className='grid grid-cols-4 bg-slate-200 p-2 mt-3'>
         <h2 className='font-bold'>Name</h2>
         <h2 className='font-bold'>Amount</h2>
         <h2 className='font-bold'>Date</h2>
-        <h2 className='font-bold'>Action</h2>
+        <h2 className='font-bold flex justify-center'>Action</h2>
       </div>
       {expensesList.map((expense, index) => (
         <div className='grid grid-cols-4 bg-slate-50 p-2' key={expense.id || index}>
