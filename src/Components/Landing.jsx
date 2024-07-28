@@ -14,7 +14,7 @@ function Landing() {
             className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
           >
             Manage Your Expenses
-  
+          <br/>
             <span className="block sm:inline"> Invest Smart. </span>
           </h1>
   
@@ -23,7 +23,7 @@ function Landing() {
           </p>
   
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button className="block w-full sm:w-auto rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75"
+            <Button className=" w-full sm:w-auto rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-800 hover:text-white focus:outline-none focus:ring active:text-opacity-75"
               onClick={()=>router.push('/login')}
             >
               Get Started
