@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from 'react'
-import { LayoutGrid ,PiggyBank,ReceiptText} from 'lucide-react'
+import { LayoutGrid ,PiggyBank,ReceiptText,TrendingUp,Brain} from 'lucide-react'
 import logo from "@/Images/logo.svg";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,6 +26,18 @@ function SideNav() {
     name:'Expenses',
     icon:ReceiptText,
     path:'/dashboard/expenses'
+  },
+  {
+    id:3,
+    name:'Stocks',
+    icon:TrendingUp,
+    path:'/dashboard/stocks'
+  },
+  {
+    id:3,
+    name:'AI',
+    icon:Brain,
+    path:'/dashboard/AI'
   }
 ]
 //const path=usePathname();
