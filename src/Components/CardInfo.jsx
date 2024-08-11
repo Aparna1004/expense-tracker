@@ -10,7 +10,10 @@ export const CardInfo = ({budgetList}) => {
     const [totalSpent,setTotalSpent] = useState(0);
     
     useEffect(() => {
-        budgetList&&    calculateCardInfo()
+        if(budgetList){
+            calculateCardInfo();
+
+        }  
     },[budgetList]);
 
     const calculateCardInfo =() =>{

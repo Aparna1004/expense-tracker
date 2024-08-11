@@ -9,7 +9,7 @@ import { desc, eq } from 'drizzle-orm';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
-export default function page() {
+export default function Page() {
 
   const [user] = useAuthState(auth);
   const [expensesList, setExpensesList] = useState([]);
