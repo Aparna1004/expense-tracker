@@ -1,6 +1,6 @@
 "use client";
-import ExpenseList from '@/Components/ExpenseList'
-import React, { useEffect, useState } from 'react'
+import ExpenseList from '@/Components/ExpenseList';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '@/firebase';
 import { db } from '@/utils/dbConfig';
@@ -10,13 +10,14 @@ import { FaArrowLeft } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
 const ExpensePage = () => {
-
   const [user] = useAuthState(auth);
   const [expensesList, setExpensesList] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    user && getAllExpenses();
+    if (user) {
+      getAllExpenses();
+    }
   }, [user]);
 
   const getAllExpenses = async () => {
@@ -30,18 +31,18 @@ const ExpensePage = () => {
       .where(eq(Budgets.createdBy, user?.email))
       .orderBy(desc(Expense.id));
     setExpensesList(result);
-    console.log("----expensem",result);
-};
+    console.log("----expensem", result);
+  };
 
   return (
-    <div className='h-screen p-10'>
-    <div className='flex gap-2 items-center'>
-      <FaArrowLeft className='text-3xl font-extrabold cursor-pointer' onClick={()=>router.back()}/>
-      <h2 className='font-bold text-3xl'>My Expenses</h2>
+    <div className='min-h-screen p-4 sm:p-6 lg:p-10'>
+      <div className='flex gap-3 items-center mb-4'>
+        <FaArrowLeft className='text-2xl sm:text-3xl cursor-pointer' onClick={() => router.back()} />
+        <h2 className='font-bold text-2xl sm:text-3xl'>My Expenses</h2>
+      </div>
+      <ExpenseList expensesList={expensesList} refreshData={() => getAllExpenses()} />
     </div>
-      <ExpenseList expensesList={expensesList} refreshData={()=>getAllExpenses()}/>
-  </div>
-    )
+  );
 }
 
 export default ExpensePage;
