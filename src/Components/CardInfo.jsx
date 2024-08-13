@@ -35,14 +35,14 @@ export const CardInfo = ({budgetList}) => {
             <div className='flex items-center justify-between border p-7 rounded-lg '>
                 <div>
                     <h2 className='text-sm'>Total Budget</h2>
-                    <h2 className='font-bold text-2xl'><LiaRupeeSignSolid /> {totalBudget}</h2>
+                    <h2 className='font-bold text-2xl flex gap-2'><LiaRupeeSignSolid /> {totalBudget}</h2>
                 </div>
                 <PiPiggyBankBold className='bg-blue-800 p-3 h-12 w-12 rounded-full text-white' />
             </div>
             <div className='flex items-center justify-between border p-7 rounded-lg '>
                 <div>
                     <h2 className='text-sm'>Total Spent</h2>
-                    <h2 className='font-bold text-2xl'><LiaRupeeSignSolid /> {totalSpent}</h2>
+                    <h2 className='font-bold text-2xl flex gap-2'><LiaRupeeSignSolid /> {totalSpent}</h2>
                 </div>
                 <TiDocumentText className='bg-blue-800 p-3 h-12 w-12 rounded-full text-white'/>
             </div>
