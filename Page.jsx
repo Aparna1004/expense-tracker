@@ -9,9 +9,9 @@ import { desc, eq } from 'drizzle-orm';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
-const Page = () => {
+export default function Page() {
 
-    const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [expensesList, setExpensesList] = useState([]);
   const router = useRouter();
 
@@ -35,13 +35,11 @@ const Page = () => {
 
   return (
     <div className='h-screen p-10'>
-    <div className='flex gap-2 items-center'>
-      <FaArrowLeft className='text-3xl font-extrabold cursor-pointer' onClick={()=>router.back()}/>
-      <h2 className='font-bold text-3xl'>My Expenses</h2>
+      <div className='flex gap-2 items-center'>
+        <FaArrowLeft className='text-3xl font-extrabold cursor-pointer' onClick={()=>router.back()}/>
+        <h2 className='font-bold text-3xl'>My Expenses</h2>
+      </div>
+        <ExpenseList expensesList={expensesList} refreshData={()=>getAllExpenses()}/>
     </div>
-      <ExpenseList expensesList={expensesList} refreshData={()=>getAllExpenses()}/>
-  </div>
-    )
+  )
 }
-
-export default Page

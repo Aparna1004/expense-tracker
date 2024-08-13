@@ -36,7 +36,7 @@ const Page = () => {
       setBudgetList(result);
       console.log("here");
       getAllExpenses();
-  },[user,getAllExpenses]);
+  },[user]);
 
   const getAllExpenses =useCallback( async () => {
       if(!user) return;
