@@ -26,10 +26,10 @@ const SignOutButton = () => {
   };
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center flex-col'>
       <button className='p-3' onClick={handleSignOut}>
-        <h2 className="text-xl font-bold">Logout</h2>
-        <FiLogOut />
+        <h2 className="text-md font-bold">Logout</h2>
+        <FiLogOut className="text-md"/>
       </button>
     </div>
   );
