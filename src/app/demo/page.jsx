@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
+import { FiLogOut } from "react-icons/fi";
 
 const Page = ({ params }) => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Page = ({ params }) => {
 
   return (
     <div className='flex justify-center items-center'>
-      <button className='p-3' onClick={handleSignOut}>Logout</button>
+      <button className='p-3' onClick={handleSignOut}><h2 className="text-xl font-bold">Logout</h2><FiLogOut /></button>
     </div>
   );
 };

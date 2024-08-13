@@ -1,6 +1,6 @@
 import React from 'react'
 import { auth } from '@/firebase'
-import { FiLogOut } from "react-icons/fi";
+import SignOutButton from "../Components/SignOutButton";
 
 function DashboardHeader() {
   return (
@@ -11,7 +11,7 @@ function DashboardHeader() {
         </div>
 
         <div>
-          <h2 className="text-xl font-bold">Logout</h2><FiLogOut />
+          <SignOutButton />
         </div>
       
     </div>
