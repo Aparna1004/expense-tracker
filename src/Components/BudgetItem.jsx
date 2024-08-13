@@ -26,8 +26,8 @@ const BudgetItem = ({budget}) => {
         </div>
         <div className='mt-5'>
             <div className='flex items-center justify-between mb-3'>
-              <h2 className='text-xs text-slate-400 flex gap-2 items-center'><LiaRupeeSignSolid /><div>{(budget.totalSpend)?budget.totalSpend:0} Spent</div></h2>
-              <h2 className='text-xs text-slate-400 flex gap-2 items-center'><LiaRupeeSignSolid /><div>{budget.amount-budget.totalSpend} Remaining</div></h2>
+              <h2 className='text-xs text-slate-400 flex gap-1 items-center'><LiaRupeeSignSolid /><div>{(budget.totalSpend)?budget.totalSpend:0} Spent</div></h2>
+              <h2 className='text-xs text-slate-400 flex gap-1 items-center'><LiaRupeeSignSolid /><div>{budget.amount-budget.totalSpend} Remaining</div></h2>
             </div>
             <div className='w-full bg-slate-300 h-2 rounded-full'>
               <div className='bg-blue-600 h-2 rounded-full'
