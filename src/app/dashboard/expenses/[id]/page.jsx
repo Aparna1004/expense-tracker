@@ -19,9 +19,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../../../../components/ui/alert-dialog";
 import { useRouter } from 'next/navigation';
-import { EditBudget } from '@/Components/EditBudget';
+import { EditBudget } from '../../../..//Components/EditBudget';
 import { useAuthState } from "react-firebase-hooks/auth";
 
 
