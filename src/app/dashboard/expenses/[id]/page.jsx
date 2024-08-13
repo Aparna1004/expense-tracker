@@ -1,13 +1,13 @@
 "use client";
-import { db } from '@/utils/dbConfig';
-import { Budgets, Expense } from '@/utils/schema';
+import { db } from '../../../../utils/dbConfig';
+import { Budgets, Expense } from '../../../../utils/schema';
 import { getTableColumns, eq, sql, desc } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react';
-import { auth } from '@/firebase';
-import BudgetItem from '@/Components/BudgetItem';
-import AddExpense from '@/Components/AddExpense';
-import ExpenseList from '@/Components/ExpenseList';
-import { Button } from '@/Components/ui/button';
+import { auth } from '../../../../firebase';
+import BudgetItem from '../../../../Components/BudgetItem';
+import AddExpense from '../../../../Components/AddExpense';
+import ExpenseList from '../../../../Components/ExpenseList';
+import { Button } from '../../../../Components/ui/button';
 import { GoTrash, GoArrowLeft } from "react-icons/go";
 import {
   AlertDialog,
