@@ -22,12 +22,12 @@ const BudgetItem = ({budget}) => {
                 <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
             </div>
         </div>
-        <h2 className='font-bold text-primary text-lg flex gap-2'><LiaRupeeSignSolid />{budget.amount}</h2>
+        <h2 className='font-bold text-primary text-lg flex gap-2'><LiaRupeeSignSolid /><div>{budget.amount}</div></h2>
         </div>
         <div className='mt-5'>
             <div className='flex items-center justify-between mb-3'>
-              <h2 className='text-xs text-slate-400 flex gap-2'><LiaRupeeSignSolid />{(budget.totalSpend)?budget.totalSpend:0} Spent</h2>
-              <h2 className='text-xs text-slate-400 flex gap-2'><LiaRupeeSignSolid />{budget.amount-budget.totalSpend} Remaining</h2>
+              <h2 className='text-xs text-slate-400 flex gap-2 items-center'><LiaRupeeSignSolid /><div>{(budget.totalSpend)?budget.totalSpend:0} Spent</div></h2>
+              <h2 className='text-xs text-slate-400 flex gap-2 items-center'><LiaRupeeSignSolid /><div>{budget.amount-budget.totalSpend} Remaining</div></h2>
             </div>
             <div className='w-full bg-slate-300 h-2 rounded-full'>
               <div className='bg-blue-600 h-2 rounded-full'
