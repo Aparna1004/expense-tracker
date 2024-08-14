@@ -12,7 +12,7 @@ const BudgetItem = ({ budget }) => {
 
   return (
     <Link href={`/dashboard/expenses/${budget.id}`} >
-      {false?<div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto flex justify-center items-center'>
+      {true ? <div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto flex justify-center items-center'>
         <IoWarningSharp className="text-red-700 text-3xl"/>
       </div>
       :
