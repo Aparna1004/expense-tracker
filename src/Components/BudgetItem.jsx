@@ -22,7 +22,7 @@ const BudgetItem = ({budget}) => {
                 <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
             </div>
         </div>
-        <h2 className='font-bold text-primary text-lg flex gap-2'><LiaRupeeSignSolid /><div>{budget.amount}</div></h2>
+        <h2 className='font-bold text-primary text-lg flex gap-2 items-center'><LiaRupeeSignSolid /><div>{budget.amount}</div></h2>
         </div>
         <div className='mt-5'>
             <div className='flex items-center justify-between mb-3'>
