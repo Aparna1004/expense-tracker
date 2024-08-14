@@ -15,7 +15,7 @@ const BudgetItem = ({ budget }) => {
       <div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto'>
         <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between'>
           <div className='flex gap-4 items-center'>
-            <div className='p-2 sm:p-3 bg-slate-100 rounded-full text-2xl'>
+            <div className='p-2 sm:p-3 bg-slate-100 rounded-full flex justify-center items-center'>
               {(calculateProgressPrec()<80) ? budget?.icon : <IoWarningSharp className="text-red-400 text-xl animate-ping"/>}
             </div>
             <div>
