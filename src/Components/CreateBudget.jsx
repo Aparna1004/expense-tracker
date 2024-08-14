@@ -38,22 +38,22 @@ const CreateBudget = ({ refreshData }) => {
     <div>
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogTrigger asChild className='w-full'>
-          <div className='bg-slate-100 py-12 px-20 rounded-md flex items-center flex-col border-2 border-dashed cursor-pointer hover:shadow-md'>
-            <h2 className='text-3xl'>+</h2>
-            <h2>Create New Budget</h2>
+          <div className='bg-slate-100 py-8 px-6 rounded-md flex items-center flex-col border-2 border-dashed cursor-pointer hover:shadow-md'>
+            <h2 className='text-2xl sm:text-3xl'>+</h2>
+            <h2 className='text-sm sm:text-base'>Create New Budget</h2>
           </div>
         </DialogTrigger>
-        <DialogContent className="bg-white rounded-lg">
+        <DialogContent className="bg-white rounded-lg max-w-md mx-auto p-4 sm:p-6">
           <DialogHeader>
-            <DialogTitle>Create New Budget</DialogTitle>
-            <DialogDescription>
-              <div className='mt-5'>
-                <Button size="lg" className="text-lg" variant="outline" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+            <DialogTitle className='text-lg sm:text-xl'>Create New Budget</DialogTitle>
+            <DialogDescription className='text-sm sm:text-base'>
+              <div className='mt-3'>
+                <Button size="lg" className="text-lg sm:text-xl" variant="outline" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
                   {emojiIcon}
                 </Button>
                 {showEmojiPicker && (
-                  <div className='absolute'>
-                    <EmojiPicker className='z-10'
+                  <div className='absolute z-10'>
+                    <EmojiPicker
                       onEmojiClick={(e) => {
                         setEmojiIcon(e.emoji);
                         setShowEmojiPicker(false);
@@ -61,20 +61,20 @@ const CreateBudget = ({ refreshData }) => {
                     />
                   </div>
                 )}
-                <div className='mt-2'>
-                  <h2 className='text-black font-medium my-1'>Budget Name</h2>
-                  <Input type="text" placeholder="e.g Home Decor" onChange={(e) => setName(e.target.value)} value={name} />
+                <div className='mt-4'>
+                  <h2 className='text-black font-medium text-sm sm:text-base my-1'>Budget Name</h2>
+                  <Input type="text" placeholder="e.g Home Decor" onChange={(e) => setName(e.target.value)} value={name} className='w-full'/>
                 </div>
-                <div className='mt-2'>
-                  <h2 className='text-black font-medium my-1'>Budget Amount</h2>
-                  <Input type="number" placeholder="e.g 5000" onChange={(e) => setAmount(e.target.value)} value={amount} />
+                <div className='mt-4'>
+                  <h2 className='text-black font-medium text-sm sm:text-base my-1'>Budget Amount</h2>
+                  <Input type="number" placeholder="e.g 5000" onChange={(e) => setAmount(e.target.value)} value={amount} className='w-full'/>
                 </div>
               </div>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose className='w-full'>
-              <Button disabled={!(name && amount)} onClick={()=>onCreateBudget()} className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">
+              <Button disabled={!(name && amount)} onClick={() => onCreateBudget()} className="bg-blue-600 text-white rounded-md mt-5 w-full hover:bg-blue-500">
                 Create Budget
               </Button>
             </DialogClose>

@@ -1,12 +1,12 @@
-import ExpensePage from '@/Components/ExpencePage'
-import React from 'react'
+import ExpensePage from '@/Components/ExpensePage';
+import React from 'react';
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-      <ExpensePage/>
+    <div className="p-4 sm:p-6 lg:p-8">
+      <ExpensePage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

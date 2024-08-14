@@ -35,34 +35,35 @@ const LoginForm = () => {
 
   if (loading) {
     return <div className='h-screen flex justify-center items-center bg-slate-50'>
+      <Loader content="Loading..." />
     </div>;
   }
 
   return (
-    <div className='h-screen flex justify-center items-center bg-slate-50'>
-      <div className='drop-shadow-2xl rounded-lg border-t-4 bg-gray-100 border-blue-600'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-3 p-12 rounded-lg'>
-          <div className='text-3xl font-bold'>LOGIN</div>
+    <div className='h-screen flex justify-center items-center bg-slate-50 p-4'>
+      <div className='w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl drop-shadow-2xl rounded-lg border-t-4 bg-gray-100 border-blue-600 p-6'>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+          <div className='text-2xl sm:text-3xl font-bold text-center'>LOGIN</div>
           <input
             type="text"
             placeholder='Email'
             onChange={(e) => setEmail(e.target.value)}
-            className='bg-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-200 active:bg-gray-200'
+            className='bg-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-200 active:bg-gray-200 text-sm sm:text-base'
           />
           <input
             type="password"
             placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
-            className='bg-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-200 active:bg-gray-200'
+            className='bg-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-200 active:bg-gray-200 text-sm sm:text-base'
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-900 focus:outline-none"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none text-sm sm:text-base"
           >
             Login
           </button>
-          {error && <h1 className='bg-red-600 p-1 rounded-md text-white'>Invalid credentials</h1>}
-          <h2>Do you have an account? <a className="text-blue-600 hover:text-blue-300" href='/register'>Register</a></h2>
+          {error && <h1 className='bg-red-600 p-2 rounded-md text-white text-center text-sm'>{error}</h1>}
+          <h2 className='text-center text-sm sm:text-base'>Do you have an account? <a className="text-blue-600 hover:text-blue-300" href='/register'>Register</a></h2>
         </form>
       </div>
     </div>

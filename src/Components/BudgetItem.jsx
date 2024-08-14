@@ -1,45 +1,53 @@
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 import { LiaRupeeSignSolid } from "react-icons/lia";
 
-const BudgetItem = ({budget}) => {
-  const calculateProgressPrec=() => {
-    const per=(budget.totalSpend/budget.amount)*100;
+const BudgetItem = ({ budget }) => {
+  const calculateProgressPrec = () => {
+    const per = (budget.totalSpend / budget.amount) * 100;
     return per.toFixed(2);
   }
 
   return (
-    <Link href={"/dashboard/expenses/"+budget.id} >
-      <h2></h2>
-      <div className='p-5 border rounded-lg hover:shadow-md cursor-pointer h-[170px]'>
-        <div className='flex gap-2 items-center justify-between'>
-        <div className='flex gap-2 items-center'>
-            <h2 className='p-3 px-4 bg-slate-100 rounded-full text-2xl'>
-                {budget?.icon}
-            </h2>
+    <Link href={`/dashboard/expenses/${budget.id}`} >
+      <div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto'>
+        <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between'>
+          <div className='flex gap-4 items-center'>
+            <div className='p-2 sm:p-3 bg-slate-100 rounded-full text-2xl'>
+              {budget?.icon}
+            </div>
             <div>
-                <h2 className='font-bold'>{budget.name}</h2>
-                <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
+              <h2 className='font-bold text-lg sm:text-xl'>{budget.name}</h2>
+              <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
             </div>
+          </div>
+          <h2 className='font-bold text-primary text-lg flex gap-2 items-center'>
+            <LiaRupeeSignSolid />
+            <div>{budget.amount}</div>
+          </h2>
         </div>
-        <h2 className='font-bold text-primary text-lg flex gap-2 items-center'><LiaRupeeSignSolid /><div>{budget.amount}</div></h2>
-        </div>
-        <div className='mt-5'>
-            <div className='flex items-center justify-between mb-3'>
-              <h2 className='text-xs text-slate-400 flex gap-1 items-center'><LiaRupeeSignSolid /><div>{(budget.totalSpend)?budget.totalSpend:0} Spent</div></h2>
-              <h2 className='text-xs text-slate-400 flex gap-1 items-center'><LiaRupeeSignSolid /><div>{budget.amount-budget.totalSpend} Remaining</div></h2>
-            </div>
-            <div className='w-full bg-slate-300 h-2 rounded-full'>
-              <div className='bg-blue-600 h-2 rounded-full'
+        <div className='mt-4'>
+          <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 text-xs text-slate-400'>
+            <h2 className='flex gap-1 items-center'>
+              <LiaRupeeSignSolid />
+              <div>{budget.totalSpend ? budget.totalSpend : 0} Spent</div>
+            </h2>
+            <h2 className='flex gap-1 items-center'>
+              <LiaRupeeSignSolid />
+              <div>{budget.amount - budget.totalSpend} Remaining</div>
+            </h2>
+          </div>
+          <div className='w-full bg-slate-300 h-2 rounded-full'>
+            <div className='bg-blue-600 h-2 rounded-full'
               style={{
                 width: `${calculateProgressPrec()}%`,
               }}
-              ></div>
-            </div>
+            ></div>
+          </div>
         </div>
-        </div>
+      </div>
     </Link>
   )
 }
 
-export default BudgetItem
+export default BudgetItem;

@@ -1,64 +1,72 @@
 "use client";
-import React, { useState } from 'react'
-import { Input } from './ui/input'
+import React, { useState } from 'react';
+import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expense } from '@/utils/schema';
 import moment from 'moment';
 import { Loader } from 'lucide-react';
 
-function AddExpense({budgetId,refreshData}) {
+function AddExpense({ budgetId, refreshData }) {
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const AddNewExpense= async()=>{
+  const AddNewExpense = async () => {
     setLoading(true);
-   const result = await db.insert(Expense).values({
+    const result = await db.insert(Expense).values({
       name: name,
       amount: amount,
       budgetId: budgetId,
       createdAt: moment().format("YYYY-MM-DD")
-   }).returning({insertedAt:Budgets.id})
-   setName('');
-   setAmount('');
-   console.log(result);
+    }).returning({ insertedAt: Budgets.id });
+    setName('');
+    setAmount('');
+    console.log(result);
 
-
-
-   if (result){
-    setLoading(false);
+    if (result) {
+      setLoading(false);
       refreshData();
-   }
-   setLoading(false);
+    }
+    setLoading(false);
   }
 
   return (
-    <div className='border p-4'>
-      <h2 className='font-bold text-lg'>Add Expense</h2>
+    <div className='border p-4 sm:p-6 lg:p-8 rounded-md bg-white shadow-sm'>
+      <h2 className='font-bold text-lg sm:text-xl mb-4'>Add Expense</h2>
+      
       <div className='mt-2'>
-        <h2 className='text-black font-medium my-1'>Expense Name</h2>
-        <Input placeholder="e.g. Home Decor"
-        type="text"
-        value={name}
-        onChange={(e)=>setName(e.target.value)}
+        <label className='text-black font-medium my-1 block'>Expense Name</label>
+        <Input
+          placeholder="e.g. Home Decor"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-2 sm:p-3"
         />
       </div>
 
-      <div className='mt-2'>
-        <h2 className='text-black font-medium my-1'>Expense Amount</h2>
-        <Input placeholder="e.g. 10000"
-        type="number"
-        value={amount}
-        onChange={(e)=>setAmount(e.target.value)}
+      <div className='mt-4'>
+        <label className='text-black font-medium my-1 block'>Expense Amount</label>
+        <Input
+          placeholder="e.g. 10000"
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          className="w-full p-2 sm:p-3"
         />
       </div>
-      <Button onClick={()=>AddNewExpense()} disabled={!(name&&amount)||loading} className="bg-blue-800 hover:bg-blue-600 mt-2 w-full text-white">
-        {loading?<Loader className='animate-spin'/>:"Add New Expenses"}
+      
+      <Button 
+        onClick={() => AddNewExpense()} 
+        disabled={!(name && amount) || loading} 
+        className="bg-blue-800 hover:bg-blue-600 mt-4 w-full text-white py-2 sm:py-3"
+      >
+        {loading ? <Loader className='animate-spin' /> : "Add New Expense"}
       </Button>
     </div>
-  )
+  );
 }
 
-export default AddExpense
+export default AddExpense;
