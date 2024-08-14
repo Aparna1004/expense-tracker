@@ -12,11 +12,15 @@ const BudgetItem = ({ budget }) => {
 
   return (
     <Link href={`/dashboard/expenses/${budget.id}`} >
+      {false?<div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto flex justify-center items-center'>
+        <IoWarningSharp className="text-red-700 text-3xl"/>
+      </div>
+      :
       <div className='p-4 sm:p-5 border rounded-lg hover:shadow-md cursor-pointer h-auto'>
         <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between'>
           <div className='flex gap-4 items-center'>
             <div className='p-2 sm:p-3 bg-slate-100 rounded-full text-2xl'>
-              {false ? budget?.icon : <IoWarningSharp className="text-red-400 text-2xl"/>}
+              {budget?.icon}
             </div>
             <div>
               <h2 className='font-bold text-lg sm:text-xl'>{budget.name}</h2>
@@ -47,7 +51,7 @@ const BudgetItem = ({ budget }) => {
             ></div>
           </div>
         </div>
-      </div>
+      </div>}
     </Link>
   )
 }
