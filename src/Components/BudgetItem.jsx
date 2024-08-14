@@ -16,7 +16,7 @@ const BudgetItem = ({ budget }) => {
         <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between'>
           <div className='flex gap-4 items-center'>
             <div className='p-2 sm:p-3 bg-slate-100 rounded-full text-2xl'>
-              {budget?.icon}
+              {false ? budget?.icon : <IoWarningSharp className="text-red-400 text-2xl"/>}
             </div>
             <div>
               <h2 className='font-bold text-lg sm:text-xl'>{budget.name}</h2>
@@ -25,7 +25,7 @@ const BudgetItem = ({ budget }) => {
           </div>
           <h2 className='font-bold text-primary text-lg flex gap-2 items-center'>
             <LiaRupeeSignSolid />
-            <div>{false ? budget.amount: <IoWarningSharp className="text-red-400 text-2xl"/>}</div>
+            <div>{budget.amount}</div>
           </h2>
         </div>
         <div className='mt-4'>
@@ -40,7 +40,7 @@ const BudgetItem = ({ budget }) => {
             </h2>
           </div>
           <div className='w-full bg-slate-300 h-2 rounded-full'>
-            <div className='bg-blue-600 h-2 rounded-full'
+            <div className={`${(calculateProgressPrec()<80)?'bg-blue-600':'bg-red-600'} h-2 rounded-full`}
               style={{
                 width: `${calculateProgressPrec()}%`,
               }}
