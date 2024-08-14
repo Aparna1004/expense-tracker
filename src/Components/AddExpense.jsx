@@ -54,7 +54,7 @@ function AddExpense({budgetId,refreshData}) {
         onChange={(e)=>setAmount(e.target.value)}
         />
       </div>
-      <Button onClick={()=>AddNewExpense()} disabled={!(name&&amount)||loading} className=" bg-blue-800 hover:bg-blue-600 mt-2 w-full text-white">
+      <Button onClick={()=>AddNewExpense()} disabled={!(name&&amount)||loading} className="bg-blue-800 hover:bg-blue-600 mt-2 w-full text-white">
         {loading?<Loader className='animate-spin'/>:"Add New Expenses"}
       </Button>
     </div>
