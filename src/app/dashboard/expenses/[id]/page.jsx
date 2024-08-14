@@ -66,6 +66,9 @@ const Page = ({ params }) => {
   const getExpensesList=async()=>{
 
     const result = await db.select({
+      id: Expense.id,
+      name: Expense.name,
+      amount: Expense.amount,
       createdBy: Expense.createdAt
     })
     .from(Expense)
