@@ -40,7 +40,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='h-screen flex justify-center items-center bg-slate-50 p-4'>
+    <div className='h-screen flex justify-center items-center p-4'>
       <div className='w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl drop-shadow-2xl rounded-lg border-t-4 bg-gray-100 border-blue-600 p-6'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           <div className='text-2xl sm:text-3xl font-bold text-center'>LOGIN</div>
