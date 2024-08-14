@@ -123,7 +123,7 @@ const Page = ({ params }) => {
       <div className='grid grid-cols-1 md:grid-cols-2 mt-6 gap-5'>
         {(budgetInfo) ? <BudgetItem budget={budgetInfo} />:
         <div className=" h-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div>}
-        <AddExpense budgetId={params.id} user={auth} refreshData={()=>getBudgetInfo()}/>
+        <AddExpense budget={budgetInfo} budgetId={params.id} user={auth} refreshData={()=>getBudgetInfo()}/>
       </div>
       <div className='mt-4'>
         <h2 className='text-2xl font-bold'>Latest Expenses</h2>
