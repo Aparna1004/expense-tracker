@@ -70,7 +70,7 @@ const Page = ({ params }) => {
     .where(eq(Expense.budgetId,params.id))
     .orderBy(desc(Expense.id));
     setExpensesList(result);
-    console.log(result);
+    console.log("-------------",result);
   }
 
   const deleteBudget=async()=>{
