@@ -16,7 +16,7 @@ const BudgetItem = ({ budget }) => {
         <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between'>
           <div className='flex gap-4 items-center'>
             <div className='p-2 sm:p-3 bg-slate-100 rounded-full text-2xl'>
-              {(calculateProgressPrec()<80) ? budget?.icon : <IoWarningSharp className="text-red-400 text-2xl"/>}
+              {(calculateProgressPrec()<80) ? budget?.icon : <IoWarningSharp className="text-red-400 text-2xl animate-ping"/>}
             </div>
             <div>
               <h2 className='font-bold text-lg sm:text-xl'>{budget.name}</h2>
