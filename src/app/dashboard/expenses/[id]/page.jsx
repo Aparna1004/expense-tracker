@@ -65,7 +65,9 @@ const Page = ({ params }) => {
 
   const getExpensesList=async()=>{
 
-    const result = await db.select()
+    const result = await db.select({
+      createdBy: Expense.createdAt
+    })
     .from(Expense)
     .where(eq(Expense.budgetId,params.id))
     .orderBy(desc(Expense.id));
