@@ -30,7 +30,7 @@ const ExpenseList = ({ expensesList, refreshData }) => {
         <div className='grid grid-cols-4 bg-slate-50 p-2' key={expense.id || index}>
           <h2>{expense.name}</h2>
           <h2>{expense.amount}</h2>
-          <h2>{new Date(expense.createdBy).toLocaleDateString()}</h2>
+          <h2>{expense.createdBy}</h2>
           <h2 className='flex items-center justify-center'><GoTrash className='text-red-600 cursor-pointer text-lg' onClick={() => deleteExpense(expense)} /></h2>
         </div>
       ))}

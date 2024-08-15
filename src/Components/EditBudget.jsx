@@ -24,18 +24,20 @@ export const EditBudget = ({budgetInfo, refreshData}) => {
     }, [budgetInfo]);
 
     const onUpdateBudget = async () => {
+        if (amount >= budgetInfo.totalSpend){
         const result = await db.update(Budgets).set({
             name: name,
             amount: amount,
             icon: emojiIcon,
         }).where(eq(Budgets.id, budgetInfo?.id)).returning();
-
         if (result) {
             refreshData();
             console.log("Budget updated successfully!");
         }
+    }else{
+            alert("Amount cannot be lesser than total spent");
+        }
     }
-
     return (
         <div>
             <Dialog>

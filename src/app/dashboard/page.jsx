@@ -9,6 +9,7 @@ import BarChartDashboard from '@/Components/BarChartDashboard';
 import BudgetItem from '@/Components/BudgetItem';
 import ExpenseList from '@/Components/ExpenseList';
 import { useAuthState } from "react-firebase-hooks/auth";
+import TableToExcel from '@/Components/TableToExcel';
 
 const Page = () => {
   
@@ -62,7 +63,7 @@ const Page = () => {
 
   return (
     <div className='p-8'>
-      <h2 className='font-bold text-3xl'>Hi, {user?.email ? user?.email : "name"} ✌️</h2>
+      <h2 className='font-bold text-3xl'>Hi, {user?.displayName ? user?.displayName : "name"} ✌️</h2>
       <p className='text-gray-500'>Here&#39;s what&#39;s happening with your money, Let&#39;s manage your expense</p>
       {console.log("inside--PAGE", budgetList)}
       <CardInfo budgetList={budgetList} />
@@ -72,11 +73,16 @@ const Page = () => {
             budgetList={budgetList} />
           <ExpenseList expensesList={expensesList} refreshData={()=>getBudgetList()}/>
         </div>
-        <div className='grid gap-3'>
+        <div className='flex flex-col gap-3'>
+          <div>
           <h2 className='font-bold text-lg'>Latest Budgets</h2>
           {budgetList.map((budget, index) => (
             <BudgetItem budget={budget} key={index} />
           ))}
+          </div>
+          <div>
+            <TableToExcel expensesList={expensesList}/>
+          </div>
         </div>
       </div>
     </div>

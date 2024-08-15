@@ -21,7 +21,7 @@ function AddExpense({ budget, budgetId, refreshData }) {
       name: name,
       amount: amount,
       budgetId: budgetId,
-      createdAt: moment().format("YYYY-MM-DD")
+      createdAt: moment().format("DD-MM-YYYY")
     }).returning({ insertedAt: Budgets.id });
     setName('');
     setAmount('');
@@ -34,6 +34,7 @@ function AddExpense({ budget, budgetId, refreshData }) {
     setLoading(false);
     }else{
       alert("Amount Exceeded")
+      setLoading(false);
     }
   }
 

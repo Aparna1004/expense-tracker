@@ -1,5 +1,5 @@
 "use client";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '@/firebase';
 import { setDoc, doc } from "firebase/firestore";
@@ -19,7 +19,7 @@ const Register = () => {
     }, [user]);
 
     const [username, setUsername] = useState("");
-    const [number, setNumber] = useState("");
+    // const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -30,10 +30,13 @@ const Register = () => {
             await createUserWithEmailAndPassword(auth, email, password);
             const user = auth.currentUser;
             if (user) {
+                await updateProfile(user, {
+                    displayName:username 
+                  })
                 await setDoc(doc(db, "Users", user.uid), {
                     email: user.email,
                     username: username,
-                    number: number,
+                    // number: number,
                     role: "user"
                 });
             }
@@ -64,13 +67,13 @@ const Register = () => {
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
-                        <input
+                        {/* <input
                             type='tel'
                             placeholder='Phone number'
                             className='bg-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-200 active:bg-gray-200'
                             onChange={(e) => setNumber(e.target.value)}
                             required
-                        />
+                        /> */}
                         <input
                             type='email'
                             placeholder='Email'
