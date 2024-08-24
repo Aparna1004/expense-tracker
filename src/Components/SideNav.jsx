@@ -10,7 +10,7 @@ function SideNav() {
     { id: 2, name: 'Budgets', icon: PiggyBank, path: '/dashboard/budgets' },
     { id: 3, name: 'Expenses', icon: ReceiptText, path: '/dashboard/expenses' },
     { id: 4, name: 'Stocks', icon: TrendingUp, path: '/dashboard/stocks' },
-    { id: 5, name: 'AI', icon: Brain, path: '/dashboard/AI' }
+    // { id: 5, name: 'AI', icon: Brain, path: '/dashboard/AI' }
   ];
 
   return (
