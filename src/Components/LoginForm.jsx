@@ -20,6 +20,10 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const handleResetPassword = () =>{
+    router.push("/reset");
+  }
+
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     try {
@@ -63,6 +67,7 @@ const LoginForm = () => {
             Login
           </button>
           {error && <h1 className='bg-red-600 p-2 rounded-md text-white text-center text-sm'>{error}</h1>}
+          <p onClick={handleResetPassword} className='flex justify-end cursor-pointer'>Forgot Password ?</p>
           <h2 className='text-center text-sm sm:text-base'>Do you have an account? <a className="text-blue-600 hover:text-blue-300" href='/register'>Register</a></h2>
         </form>
       </div>
